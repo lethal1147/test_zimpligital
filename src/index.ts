@@ -3,6 +3,7 @@ import cors from "cors";
 import morgan from "morgan";
 import { errorHandler } from "@middlewares";
 import router from "@routes";
+import { initialRedis } from "@libs";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(morgan(process.env.NODE_ENV === "develop" ? "dev" : "combined"));
 app.use("/api", router);
 app.use(errorHandler);
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  await initialRedis();
   console.log("Server running on port : " + PORT);
 });
