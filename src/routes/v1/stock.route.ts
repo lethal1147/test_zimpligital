@@ -4,6 +4,6 @@ import { getStock } from "@controllers";
 
 const router: Router = express.Router();
 
-router.post("/", getStock);
+router.get("/:ticker", getStock);
 
 export default router;
